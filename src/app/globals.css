@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-accent: #06b6d4;
+}
+
+/* ---------- base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #030712;
+  color: #e5e7eb;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: #6366f1;
+  color: #fff;
+}
+
+/* ---------- section utility ---------- */
+.section-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-inline: 2rem;
+  }
+}
+
+/* ---------- gradient text ---------- */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- glow effect ---------- */
+.glow {
+  box-shadow: 0 0 60px rgba(99, 102, 241, 0.15);
+}
+
+/* ---------- card hover ---------- */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+}
+
+/* ---------- fade-in animation ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
