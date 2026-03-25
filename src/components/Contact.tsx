@@ -62,18 +62,21 @@ export default function Contact() {
     anime({ targets: ".form-submit", scale: [1, 0.96, 1], duration: 400, easing: "easeInOutQuad" });
     try {
       const formData = new FormData(formRef.current);
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formsubmit.co/ajax/sarvarsharipov333@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify({
-          user_name: formData.get("user_name"),
-          user_email: formData.get("user_email"),
-          subject: formData.get("subject"),
+          name: formData.get("user_name"),
+          email: formData.get("user_email"),
+          _subject: formData.get("subject") || "New Portfolio Contact",
           message: formData.get("message"),
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      if (!res.ok) throw new Error(data.message || "Sending failed");
       setStatus("success");
       formRef.current.reset();
       anime({ targets: ".success-msg", scale: [0.85, 1], opacity: [0, 1], duration: 600, easing: "easeOutBack" });
@@ -98,7 +101,7 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="space-y-6 md:col-span-2">
             {[
-              { icon: "📧", label: "Email", value: "sarvardev035@gmail.com", href: "mailto:sarvardev035@gmail.com" },
+              { icon: "📧", label: "Email", value: "sarvarsharipov1035@gmail.com", href: "mailto:sarvarsharipov1035@gmail.com" },
               { icon: "📍", label: "Location", value: "Uzbekistan", href: "#" },
               { icon: "💻", label: "GitHub", value: "Sarvardev035", href: "https://github.com/Sarvardev035" },
               { icon: "🎓", label: "University", value: "Amity University Tashkent", href: "#" },
@@ -125,7 +128,7 @@ export default function Contact() {
               <a href="https://www.linkedin.com/in/sarvar-sharipov-4bb187332/" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition-all hover:border-blue-500/30 hover:text-white">
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
               </a>
-              <a href="mailto:sarvardev035@gmail.com" className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition-all hover:border-red-500/30 hover:text-white">
+              <a href="mailto:sarvarsharipov1035@gmail.com" className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition-all hover:border-red-500/30 hover:text-white">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
               </a>
             </div>
@@ -164,7 +167,7 @@ export default function Contact() {
             )}
             {status === "error" && (
               <div className="flex items-center gap-3 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-                Something went wrong. Please email me directly at sarvardev035@gmail.com
+                Something went wrong. Please email me directly at sarvarsharipov1035@gmail.com
               </div>
             )}
             <button type="submit" disabled={status === "sending"}

@@ -69,6 +69,11 @@ export default function Navbar() {
 
         <a
           href="#contact"
+          onClick={() => {
+            setTimeout(() => {
+              document.getElementById("user_name")?.focus();
+            }, 50);
+          }}
           className="nav-link hidden rounded-full bg-indigo-500 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/25 md:inline-flex"
           style={{ opacity: 0 }}
         >
@@ -97,7 +102,12 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <a href="#contact" onClick={() => setOpen(false)} className="mt-2 inline-block rounded-full bg-indigo-500 px-5 py-2 text-sm font-medium text-white">
+              <a href="#contact" onClick={() => {
+                setOpen(false);
+                setTimeout(() => {
+                  document.getElementById("user_name")?.focus();
+                }, 50);
+              }} className="mt-2 inline-block rounded-full bg-indigo-500 px-5 py-2 text-sm font-medium text-white">
                 Hire Me
               </a>
             </li>
