@@ -17,12 +17,12 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: "FinlyAi",
-    description: "AI-powered smart finance assistant built with TypeScript. Analyze expenses, track budgets, and get intelligent financial insights.",
+    name: "Finly (March Hackathon)",
+    description: "Currently competing in a March Hackathon with this powerful personal finance platform. Features smart budget tracking, intelligent financial insights, and a seamless modern UX designed to solve real-world financial challenges.",
     language: "TypeScript",
-    topics: ["AI", "Finance", "TypeScript", "Web App"],
+    topics: ["Hackathon", "Finance", "Next.js", "AI"],
     github: "https://github.com/Sarvardev035/FinlyAi",
-    demo: "https://sarvardev035.github.io/FinlyAi",
+    demo: "https://www.Inteullpo.online",
     stars: 0,
     featured: true,
   },

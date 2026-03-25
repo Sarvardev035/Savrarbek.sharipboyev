@@ -75,7 +75,7 @@ export default function About() {
               My toolkit includes <strong className="text-white">React</strong>, <strong className="text-white">Next.js</strong>, <strong className="text-white">TypeScript</strong>, <strong className="text-white">Node.js</strong>, and modern databases. I care deeply about code quality, accessibility, and delivering real value to users.
             </p>
             <p className="about-animate" style={{ opacity: 0 }}>
-              Participant in <strong className="text-white">ICPC</strong> &amp; <strong className="text-white">Huawei ICT International Competitions</strong>. Freelance developer since 2023, building scalable, production-ready web systems.
+              Participant in <strong className="text-white">ICPC</strong> &amp; <strong className="text-white">Huawei ICT International Competitions</strong>. Freelance developer since 2023, building scalable, production-ready web systems. Currently competing in a major March Hackathon with a comprehensive personal finance platform.
             </p>
 
             {/* Education card */}
