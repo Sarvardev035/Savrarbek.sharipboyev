@@ -77,6 +77,29 @@ export default function Contact() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Sending failed");
+      
+      try {
+        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+        const ctx = new AudioContext();
+        const playNote = (freq: number, startTime: number, duration: number) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
+          gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + startTime + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + startTime);
+          osc.stop(ctx.currentTime + startTime + duration);
+        };
+        playNote(1046.50, 0, 0.3);    // C6 note
+        playNote(1318.51, 0.15, 0.5); // E6 note
+      } catch (e) {
+        console.error("Audio playback error", e);
+      }
+
       setStatus("success");
       formRef.current.reset();
       anime({ targets: ".success-msg", scale: [0.85, 1], opacity: [0, 1], duration: 600, easing: "easeOutBack" });
@@ -162,7 +185,7 @@ export default function Contact() {
             {status === "success" && (
               <div className="success-msg flex items-center gap-3 rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-400" style={{ opacity: 0 }}>
                 <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                Message sent! I&apos;ll reply within 24 hours.
+                Successfully sent! Thank you for reaching us, we will reach you soon.
               </div>
             )}
             {status === "error" && (
