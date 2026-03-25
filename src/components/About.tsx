@@ -8,7 +8,7 @@ export default function About() {
   const sectionRef = useAnimeOnScroll<HTMLElement>((el) => {
     anime({
       targets: el.querySelectorAll(".about-animate"),
-      translateY: [60, 0],
+      translateX: [-50, 0],
       opacity: [0, 1],
       duration: 1000,
       delay: anime.stagger(150),
@@ -17,11 +17,12 @@ export default function About() {
 
     anime({
       targets: el.querySelector(".about-avatar"),
-      scale: [0.5, 1],
-      rotate: ["-10deg", "0deg"],
+      translateX: [50, 0],
+      scale: [0.8, 1],
+      rotate: ["5deg", "0deg"],
       opacity: [0, 1],
       duration: 1200,
-      easing: "easeOutElastic(1, .8)",
+      easing: "easeOutBack(1.5)",
     });
 
     anime({

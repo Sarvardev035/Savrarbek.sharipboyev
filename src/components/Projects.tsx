@@ -177,12 +177,13 @@ export default function Projects() {
 
     anime({
       targets: el.querySelectorAll(".project-card"),
-      translateY: [100, 0],
-      scale: [0.92, 1],
+      rotateY: [-90, 0],
+      translateZ: [200, 0],
+      scale: [0.9, 1],
       opacity: [0, 1],
-      duration: 1300,
-      delay: anime.stagger(150, { start: 600 }),
-      easing: "easeOutExpo",
+      duration: 1400,
+      delay: anime.stagger(200, { start: 600 }),
+      easing: "easeOutQuart",
     });
   });
 

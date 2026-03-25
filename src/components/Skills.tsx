@@ -43,7 +43,7 @@ export default function Skills() {
   const sectionRef = useAnimeOnScroll<HTMLElement>((el) => {
     anime({
       targets: el.querySelector(".skills-heading"),
-      translateY: [50, 0],
+      translateY: [-50, 0],
       opacity: [0, 1],
       duration: 1200,
       easing: "easeOutExpo",
@@ -51,12 +51,12 @@ export default function Skills() {
 
     anime({
       targets: el.querySelectorAll(".skill-card"),
-      translateY: [80, 0],
-      rotateX: [15, 0],
+      scale: [0, 1],
+      rotateZ: [-5, 0],
       opacity: [0, 1],
-      duration: 1300,
-      delay: anime.stagger(250, { start: 400 }),
-      easing: "easeOutExpo",
+      duration: 1500,
+      delay: anime.stagger(200, { start: 300 }),
+      easing: "easeOutElastic(1, .6)",
     });
 
     setTimeout(() => {

@@ -13,28 +13,28 @@ export default function Contact() {
   const sectionRef = useAnimeOnScroll<HTMLElement>((el) => {
     anime({
       targets: el.querySelector(".contact-heading"),
-      translateY: [50, 0],
+      scale: [0.5, 1],
       opacity: [0, 1],
       duration: 1200,
-      easing: "easeOutExpo",
+      easing: "easeOutQuart",
     });
 
     anime({
       targets: el.querySelectorAll(".contact-card"),
-      translateX: [-60, 0],
+      translateX: [-150, 0],
       opacity: [0, 1],
       duration: 1100,
       delay: anime.stagger(180, { start: 400 }),
-      easing: "easeOutExpo",
+      easing: "easeOutBack(1.2)",
     });
 
     anime({
       targets: el.querySelector(".contact-form"),
-      translateX: [60, 0],
+      translateX: [150, 0],
       opacity: [0, 1],
-      duration: 1300,
-      delay: 500,
-      easing: "easeOutExpo",
+      duration: 1100,
+      delay: 400,
+      easing: "easeOutBack(1.2)",
     });
 
     anime({
