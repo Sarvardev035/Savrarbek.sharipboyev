@@ -1,101 +1,75 @@
-"use client";
-
-import { useEffect } from "react";
-import anime from "animejs";
-import { useAnimeOnScroll } from "@/hooks/useAnime";
+import { profile, stack, stats } from "@/data/profile";
+import { Counter, Reveal, SectionHead } from "./Motion";
 
 export default function About() {
-  const sectionRef = useAnimeOnScroll<HTMLElement>((el) => {
-    anime({
-      targets: el.querySelectorAll(".about-animate"),
-      translateX: [-50, 0],
-      opacity: [0, 1],
-      duration: 1000,
-      delay: anime.stagger(150),
-      easing: "easeOutExpo",
-    });
-
-    anime({
-      targets: el.querySelector(".about-avatar"),
-      translateX: [50, 0],
-      scale: [0.8, 1],
-      rotate: ["5deg", "0deg"],
-      opacity: [0, 1],
-      duration: 1200,
-      easing: "easeOutBack(1.5)",
-    });
-
-    anime({
-      targets: el.querySelectorAll(".float-shape"),
-      scale: [0, 1],
-      opacity: [0, 0.6],
-      delay: anime.stagger(200, { start: 600 }),
-      duration: 800,
-      easing: "easeOutBack",
-    });
-  });
-
-  useEffect(() => {
-    anime({
-      targets: ".float-shape",
-      translateY: () => anime.random(-15, 15),
-      translateX: () => anime.random(-15, 15),
-      rotate: () => anime.random(-20, 20),
-      duration: 3000,
-      direction: "alternate",
-      loop: true,
-      easing: "easeInOutSine",
-      delay: anime.stagger(300),
-    });
-  }, []);
-
   return (
-    <section id="about" className="relative py-24" ref={sectionRef}>
+    <section id="about" className="relative py-28">
       <div className="section-container">
-        <div className="about-animate mb-16 text-center" style={{ opacity: 0 }}>
-          <span className="text-sm font-semibold uppercase tracking-widest text-indigo-400">About Me</span>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Passionate about building great software</h2>
+        <SectionHead
+          eyebrow="01 · About"
+          title={
+            <>
+              From finding bugs to <span className="text-gradient">shipping a company.</span>
+            </>
+          }
+          sub="I started in QA at Uyqur Team, where breaking things taught me how good software is built. I grew into full-stack development, and today I design, build, test and run ooou.uz myself, using Claude and Antigravity to move at the speed of a much larger team."
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 90}>
+              <div className="spot glass h-full rounded-3xl p-6">
+                <p className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                  <Counter to={s.value} suffix={s.suffix} />
+                </p>
+                <p className="mt-2 text-sm text-slate-400">{s.label}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
-        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:items-center">
-          <div className="relative mx-auto w-full max-w-sm">
-            <div className="about-avatar relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-gray-800/40 glow" style={{ opacity: 0 }}>
-              <div className="flex h-full items-center justify-center text-6xl">👨‍💻</div>
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <Reveal className="md:col-span-2">
+            <div className="spot glass h-full rounded-3xl p-7">
+              <p className="eyebrow">How I work</p>
+              <ul className="mt-5 grid gap-4 text-slate-300 sm:grid-cols-2">
+                {[
+                  ["QA mindset", "Every feature starts with how it can fail."],
+                  ["AI pair engineering", "Claude and Antigravity for planning, code, review and tests."],
+                  ["Own production", "AWS, nginx, Cloudflare, monitoring: I run what I ship."],
+                  ["Talk to customers", "Restaurant owners shape the roadmap, not guesses."],
+                ].map(([t, d]) => (
+                  <li key={t} className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
+                    <p className="font-medium text-white">{t}</p>
+                    <p className="mt-1 text-sm text-slate-400">{d}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="float-shape absolute -left-4 -top-4 h-8 w-8 rounded-full bg-indigo-500/40" style={{ opacity: 0 }} />
-            <div className="float-shape absolute -right-3 top-1/4 h-6 w-6 rounded-lg bg-cyan-500/40" style={{ opacity: 0 }} />
-            <div className="float-shape absolute -bottom-3 left-1/4 h-10 w-10 rounded-full bg-purple-500/30" style={{ opacity: 0 }} />
-            <div className="float-shape absolute -right-5 bottom-1/4 h-5 w-5 rounded-full bg-pink-500/40" style={{ opacity: 0 }} />
-          </div>
-
-          <div className="space-y-5 text-gray-400 leading-relaxed">
-            <p className="about-animate" style={{ opacity: 0 }}>
-              I&apos;m a full-stack developer with a passion for crafting intuitive, performant web applications. I enjoy working across the entire stack — from designing responsive UIs to architecting robust back-end services.
-            </p>
-            <p className="about-animate" style={{ opacity: 0 }}>
-              My toolkit includes <strong className="text-white">React</strong>, <strong className="text-white">Next.js</strong>, <strong className="text-white">TypeScript</strong>, <strong className="text-white">Node.js</strong>, and modern databases. I care deeply about code quality, accessibility, and delivering real value to users.
-            </p>
-            <p className="about-animate" style={{ opacity: 0 }}>
-              Participant in <strong className="text-white">ICPC</strong> &amp; <strong className="text-white">Huawei ICT International Competitions</strong>. Freelance developer since 2023, building scalable, production-ready web systems. Currently competing in a major March Hackathon with a comprehensive personal finance platform.
-            </p>
-
-            {/* Education card */}
-            <div className="about-animate rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-4" style={{ opacity: 0 }}>
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-500/15 text-lg">🎓</span>
-                <div>
-                  <p className="text-sm font-semibold text-white">BSc Information Technology</p>
-                  <p className="text-sm text-indigo-300">Amity University &mdash; Tashkent</p>
-                  <p className="mt-1 text-xs text-gray-500">2023 – 2027 &nbsp;·&nbsp; Currently Enrolled</p>
-                </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="spot glass flex h-full flex-col justify-between rounded-3xl p-7">
+              <p className="eyebrow">Education</p>
+              <div className="mt-6">
+                <p className="text-xl font-semibold text-white">{profile.education.degree}</p>
+                <p className="mt-1 text-[#8fb0ff]">{profile.education.school}</p>
+                <p className="mt-3 font-mono text-xs text-slate-500">{profile.education.period}</p>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </div>
 
-            <div className="about-animate flex flex-wrap gap-3 pt-2" style={{ opacity: 0 }}>
-              <a href="#contact" className="rounded-full bg-indigo-500 px-6 py-2.5 text-sm font-medium text-white transition-all hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/25">Let&apos;s Talk</a>
-              <button onClick={() => window.print()} className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:border-white/30 hover:text-white">Download CV</button>
-            </div>
-          </div>
+      <div className="relative mt-24 overflow-hidden border-y border-white/5 py-6 [mask-image:linear-gradient(90deg,transparent,#000_15%,#000_85%,transparent)]">
+        <div className="marquee gap-3">
+          {[...stack, ...stack].map((s, i) => (
+            <span
+              key={i}
+              className="mx-1.5 whitespace-nowrap rounded-full border border-white/10 px-5 py-2 font-mono text-sm text-slate-300"
+            >
+              {s}
+            </span>
+          ))}
         </div>
       </div>
     </section>

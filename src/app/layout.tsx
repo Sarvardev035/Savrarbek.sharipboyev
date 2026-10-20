@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +7,20 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const mono = JetBrains_Mono({
+  variable: "--font-mono-jb",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Sarvarbek | Portfolio",
+  title: "Ceo.ooou.uz · Sarvarbek Sharipboyev",
   description:
-    "Full-stack developer portfolio — showcasing projects, skills, and experience.",
+    "Sarvarbek Sharipboyev: founder of ooou.uz, full-stack, QA and AI engineer building Bahola (SmartQR) with Claude and Antigravity.",
+  openGraph: {
+    title: "Ceo.ooou.uz · Sarvarbek Sharipboyev",
+    description: "Founder of ooou.uz. Full-stack, QA and AI engineer building Bahola (SmartQR).",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -20,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${mono.variable} noise font-sans antialiased`}>
         {children}
       </body>
     </html>

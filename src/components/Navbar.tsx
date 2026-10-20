@@ -1,65 +1,49 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import anime from "animejs";
+import { useEffect, useState } from "react";
 
 const links = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#bahola", label: "Bahola" },
+  { href: "#achievements", label: "Achievements" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    anime({
-      targets: navRef.current,
-      translateY: [-60, 0],
-      opacity: [0, 1],
-      duration: 1000,
-      easing: "easeOutExpo",
-    });
-
-    anime({
-      targets: ".nav-link",
-      translateY: [-20, 0],
-      opacity: [0, 1],
-      delay: anime.stagger(100, { start: 500 }),
-      duration: 600,
-      easing: "easeOutExpo",
-    });
-
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      ref={navRef}
-      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
-        scrolled
-          ? "border-white/10 bg-gray-950/90 shadow-lg shadow-indigo-500/5 backdrop-blur-lg"
-          : "border-transparent bg-transparent backdrop-blur-sm"
-      }`}
-      style={{ opacity: 0 }}
-    >
-      <nav className="section-container flex h-16 items-center justify-between">
-        <a href="#" className="text-xl font-bold tracking-tight gradient-text">
-          Sarvarbek
+    <header className="fixed inset-x-0 top-3 z-50 px-3">
+      <nav
+        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500 sm:px-5 ${
+          scrolled ? "glass shadow-2xl shadow-black/40" : "border border-transparent"
+        }`}
+      >
+        <a href="#top" className="group flex items-center gap-2 font-mono text-sm font-semibold tracking-tight text-white">
+          <span className="relative flex h-7 w-7 items-center justify-center rounded-lg bg-blue text-[11px] font-bold transition-transform duration-500 group-hover:rotate-[360deg]">
+            CEO
+          </span>
+          <span>
+            Ceo<span className="text-orange">.</span>ooou<span className="text-orange">.</span>uz
+          </span>
         </a>
 
-        <ul className="hidden gap-8 md:flex">
+        <ul className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="nav-link text-sm text-gray-400 transition-colors hover:text-white"
-                style={{ opacity: 0 }}
+                className="rounded-full px-3 py-1.5 text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {l.label}
               </a>
@@ -69,51 +53,36 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          onClick={() => {
-            setTimeout(() => {
-              document.getElementById("user_name")?.focus();
-            }, 50);
-          }}
-          className="nav-link hidden rounded-full bg-indigo-500 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/25 md:inline-flex"
-          style={{ opacity: 0 }}
+          className="hidden rounded-full bg-white px-4 py-1.5 text-sm font-medium text-ink transition-transform hover:scale-105 md:inline-block"
         >
-          Hire Me
+          Let&apos;s talk
         </a>
 
         <button
-          aria-label="Toggle menu"
-          className="flex flex-col gap-1.5 md:hidden"
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen((o) => !o)}
+          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+          aria-label="Menu"
         >
-          <span className={`block h-0.5 w-6 bg-gray-300 transition-transform ${open ? "translate-y-2 rotate-45" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-gray-300 transition-opacity ${open ? "opacity-0" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-gray-300 transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`} />
+          <span className={`h-0.5 w-5 bg-white transition-transform ${open ? "translate-y-1 rotate-45" : ""}`} />
+          <span className={`h-0.5 w-5 bg-white transition-transform ${open ? "-translate-y-1 -rotate-45" : ""}`} />
         </button>
       </nav>
 
-      {open && (
-        <div className="border-t border-white/10 bg-gray-950/95 backdrop-blur-md md:hidden">
-          <ul className="section-container flex flex-col gap-4 py-6">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} onClick={() => setOpen(false)} className="block text-base text-gray-300 transition-colors hover:text-white">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a href="#contact" onClick={() => {
-                setOpen(false);
-                setTimeout(() => {
-                  document.getElementById("user_name")?.focus();
-                }, 50);
-              }} className="mt-2 inline-block rounded-full bg-indigo-500 px-5 py-2 text-sm font-medium text-white">
-                Hire Me
+      <div
+        className={`glass mx-auto mt-2 max-w-5xl overflow-hidden rounded-3xl transition-all duration-500 md:hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <ul className="flex flex-col p-3">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a onClick={() => setOpen(false)} href={l.href} className="block rounded-xl px-4 py-3 text-slate-300 hover:bg-white/5">
+                {l.label}
               </a>
             </li>
-          </ul>
-        </div>
-      )}
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }
